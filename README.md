@@ -1,4 +1,4 @@
-# Quawale_Solver
+# Quawale Solver
 An attempt to solve the board game Quawale
 
 ## What is Qawale?
