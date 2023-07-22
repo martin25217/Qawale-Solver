@@ -4,7 +4,7 @@
 class Board{
 
     private:
-    Qeueue<Colors> board[4][4];
+    Queue<Colors> board[4][4];
 
     public:
     Board(){
