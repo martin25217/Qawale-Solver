@@ -1,4 +1,5 @@
 #include<stdexcept>
+#include <string>
 
 template <typename T> class Qeueue {
 
@@ -87,5 +88,22 @@ template <typename T> class Qeueue {
         head = nullptr;
         return;
 	}
+
+	string printQ(int maxHeight){
+        string pr;
+        Node *iterator = head;
+
+        for(int i = 0; i < length; i++){
+            T ele = iterator->value;
+            if(ele == red) pr.push_back('r');
+            else if(ele == white) pr.push_back('w');
+            else pr.push_back('y');
+            iterator->next;
+        }
+
+        for(int i = 0; i < maxHeight - length; i++) pr.push_back(' ');
+
+        return pr;
+    }
         
 };
