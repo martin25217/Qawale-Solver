@@ -1,7 +1,7 @@
 #include<stdexcept>
 #include <string>
 
-template <typename T> class Qeueue {
+template <typename T> class Queue {
 
     private:
     struct Node {
@@ -15,7 +15,7 @@ template <typename T> class Qeueue {
 
     public:
         
-    ~Qeueue(){
+    ~Queue(){
         this->clear();
     }
         
