@@ -23,7 +23,7 @@ char* splitString(std::string input){
 input convertStringToInput(char* userInputString){
     input result;
     result.startRow = *userInputString- 48;
-    result.startColumn = *userInputString - 48;
+    result.startColumn = *(userInputString + 1) - 48;
     result.direction = userInputString + 3;
     return result;
 }
