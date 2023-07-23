@@ -74,7 +74,7 @@ class Board{
                     if(j != 3) std::cout << '|';
                     if(j == 3) std::cout << std::endl;
                 }
-                std::cout << "Ola ola" << std::endl;
+                std::cout << "Ola ola" << std::endl; //oces ti imat cast maknut ola?
             }
         }
     }
