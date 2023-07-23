@@ -75,6 +75,11 @@ template <typename T> class Queue {
         return length;
     }
 
+    bool isEmpty(){
+        if(length == 0) return true;
+        else return false;
+    }
+
     void clear(){
 
         Node *iterator = head;
@@ -90,21 +95,5 @@ template <typename T> class Queue {
         return;
 	}
 
-	std::string printQ(int maxHeight){
-        std::string pr;
-        Node *iterator = head;
-
-        for(int i = 0; i < length; i++){
-            T ele = iterator->value;
-            if(ele == red) pr.push_back('r');
-            else if(ele == white) pr.push_back('w');
-            else pr.push_back('y');
-            iterator->next;
-        }
-
-        for(int i = 0; i < maxHeight - length; i++) pr.push_back(' ');
-
-        return pr;
-    }
-        
+     
 };

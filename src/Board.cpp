@@ -57,12 +57,29 @@ class Board{
         return true; 
     }
 
-    Queue<Colors> printB(int i){
-        int a = i % 4, b = i / 4;
-        return board[a][b];
+    //Input functions start
+
+    void printingF(Board *board){
+        int maxHeight = board->maxSizeQueue();
+
+        //U ovoj for petlji je negdje problem, tu treba trazit, s tim da su preliminarna istrazivanja 
+        //pokazala da kriva za sranje nije funkcija print Queue
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                std::cout<< std::endl << i << "," << j << std::endl;
+                Queue<Colors> specificQueue = this->board[i][j];
+                if(!specificQueue.isEmpty()){
+                    std::cout << printQueue(maxHeight, specificQueue);
+                    std::cout << " Ola" << std::endl;
+                    if(j != 3) std::cout << '|';
+                    if(j == 3) std::cout << std::endl;
+                }
+                std::cout << "Ola ola" << std::endl;
+            }
+        }
     }
 
-    int maxQ(){
+    int maxSizeQueue(){
         int m = 0;
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
@@ -71,5 +88,27 @@ class Board{
         }
         return m;
     }
+
+    std::string printQueue(int maxHeight, Queue<Colors> queue){
+        std::string result;
+        Queue<Colors> helperQueue;
+
+        int size = queue.size();
+        for(int i = 0; i < size; i++){
+            Colors element = queue.dequeue();
+            if(element == red) result.push_back('r');
+            else if(element == white) result.push_back('w');
+            else result.push_back('y');
+            helperQueue.enqueue(element);
+        }
+
+        while(!helperQueue.isEmpty()) queue.enqueue(helperQueue.dequeue());
+
+        for(int i = queue.size(); i < maxHeight; i++) result.push_back(' ');
+
+        return result;
+    }
+
+    //Input functions end
 
 };
