@@ -59,16 +59,16 @@ class Board{
 
     //Input functions start
 
-    void printingF(Board *board){
-        int maxHeight = board->maxSizeQueue();
+    void printGameState(){
+        int maxHeight = maxSizeQueue();
 
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
                 
                 
-                    std::cout << printQueue(maxHeight, this->board[i][j]); 
-                    if(j != 3) std::cout << '|';
-                    if(j == 3) std::cout << std::endl;
+                std::cout << printQueue(maxHeight, this->board[i][j]); 
+                if(j != 3) std::cout << '|';
+                if(j == 3) std::cout << std::endl;
                 
             }
         }
