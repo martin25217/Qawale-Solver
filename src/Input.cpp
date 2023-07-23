@@ -7,6 +7,7 @@ typedef struct{
     char* direction;
 }input;
 
+char* getPlayerInput(){}
 
 input convertStringToInput(char* userInputString){
     input result;

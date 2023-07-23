@@ -29,6 +29,8 @@ class Board{
 
         int directionLength;
         for(directionLength = 1; *(userInput.direction + directionLength) != '\0'; directionLength++);
+        //There is a sagnificant chance that this condition here is always off by one or a few more
+        //Should bugs where every input is rejected occur this is the first place to look
         if(directionLength != board[userInput.startRow][userInput.startColumn].size() + 1) return false;
 
         int rowHelper = userInput.startRow;
@@ -52,22 +54,7 @@ class Board{
 
         }while(*directionHelper != '\0');
 
-        return true;
-    }
-
-    Queue<Colors> printB(int i){
-        int a = i % 4, b = i / 4;
-        return board[a][b];
-    }
-
-    int maxQ(){
-        int m = 0;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                if(board[i][j].size() > m) m = board[i][j].size(); 
-            }
+        return true; 
         }
-        return m;
-    }
 
 };
