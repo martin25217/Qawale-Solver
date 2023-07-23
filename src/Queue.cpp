@@ -90,8 +90,8 @@ template <typename T> class Queue {
         return;
 	}
 
-	string printQ(int maxHeight){
-        string pr;
+	std::string printQ(int maxHeight){
+        std::string pr;
         Node *iterator = head;
 
         for(int i = 0; i < length; i++){

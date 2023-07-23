@@ -55,6 +55,21 @@ class Board{
         }while(*directionHelper != '\0');
 
         return true; 
+    }
+
+    Queue<Colors> printB(int i){
+        int a = i % 4, b = i / 4;
+        return board[a][b];
+    }
+
+    int maxQ(){
+        int m = 0;
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                if(board[i][j].size() > m) m = board[i][j].size(); 
+            }
         }
+        return m;
+    }
 
 };
