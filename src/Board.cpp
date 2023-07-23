@@ -63,13 +63,13 @@ class Board{
         int maxHeight = board->maxSizeQueue();
 
         //U ovoj for petlji je negdje problem, tu treba trazit, s tim da su preliminarna istrazivanja 
-        //pokazala da kriva za sranje nije funkcija print Queue
+        //pokazala da kriva za sranje nije funkcija print Queue -> speci
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
                 std::cout<< std::endl << i << "," << j << std::endl;
-                Queue<Colors> specificQueue = this->board[i][j];
-                if(!specificQueue.isEmpty()){
-                    std::cout << printQueue(maxHeight, specificQueue);
+                //Queue<Colors> specificQueue = this->board[i][j];
+                if(!this->board[i][j].isEmpty()){//this->board[i][j] umjesto specQ
+                    std::cout << printQueue(maxHeight, this->board[i][j]); //isto
                     std::cout << " Ola" << std::endl;
                     if(j != 3) std::cout << '|';
                     if(j == 3) std::cout << std::endl;
