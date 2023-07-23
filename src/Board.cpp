@@ -62,31 +62,26 @@ class Board{
     void printingF(Board *board){
         int maxHeight = board->maxSizeQueue();
 
-        //U ovoj for petlji je negdje problem, tu treba trazit, s tim da su preliminarna istrazivanja 
-        //pokazala da kriva za sranje nije funkcija print Queue -> speci
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
-                std::cout<< std::endl << i << "," << j << std::endl;
-                //Queue<Colors> specificQueue = this->board[i][j];
-                if(!this->board[i][j].isEmpty()){//this->board[i][j] umjesto specQ
-                    std::cout << printQueue(maxHeight, this->board[i][j]); //isto
-                    std::cout << " Ola" << std::endl;
+                
+                
+                    std::cout << printQueue(maxHeight, this->board[i][j]); 
                     if(j != 3) std::cout << '|';
                     if(j == 3) std::cout << std::endl;
-                }
-                std::cout << "Ola ola" << std::endl; //oces ti imat cast maknut ola?
+                
             }
         }
     }
 
     int maxSizeQueue(){
-        int m = 0;
+        int max = 0;
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
-                if(board[i][j].size() > m) m = board[i][j].size(); 
+                if(board[i][j].size() > max) max = board[i][j].size(); 
             }
         }
-        return m;
+        return max;
     }
 
     std::string printQueue(int maxHeight, Queue<Colors> queue){
@@ -103,8 +98,8 @@ class Board{
         }
 
         while(!helperQueue.isEmpty()) queue.enqueue(helperQueue.dequeue());
-
-        for(int i = queue.size(); i < maxHeight; i++) result.push_back(' ');
+        int length = queue.size();
+        for(int i = length; i < maxHeight; i++) result.push_back(' ');
 
         return result;
     }
