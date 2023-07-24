@@ -97,7 +97,7 @@ class Board{
             helperQueue.enqueue(element);
         }
 
-        while(!helperQueue.isEmpty()) queue.enqueue(helperQueue.dequeue());
+        while(!helperQueue.isEmpty()) queue.enqueue(helperQueue.dequeue()); //po meni je ovo problem
         int length = queue.size();
         for(int i = length; i < maxHeight; i++) result.push_back(' ');
 
@@ -105,5 +105,36 @@ class Board{
     }
 
     //Input functions end
+
+//making move
+ bool play(std::string userIn, Colors playerColor){
+        if(!validateInput(convertStringToInput(splitString(userIn)))) return false;
+
+        char* trail = splitString(userIn);
+        std::cout << printQueue(maxSizeQueue(), this->board[int(trail[0]) - 48][int(trail[1]) - 48]) << std::endl;
+        Queue<Colors> peak;
+        for(int i = 0; i < this->board[int(trail[0])][int(trail[1])].size(); i++) peak.enqueue(this->board[int(trail[0])][int(trail[1])].dequeue());
+        peak.enqueue(playerColor);
+
+        board[int(trail[0])][int(trail[1])].clear();
+
+        for(int i = 2; *(trail + i) != '\0'; i++){
+            Colors c = peak.dequeue();
+            if(trail[i] == 'd'){
+                this->board[trail[0] + 1][trail[1]].enqueue(c);
+            }
+            else if(trail[i] == 'u'){
+                this->board[trail[0] - 1][trail[1]].enqueue(c);
+            }
+            else if(trail[i] == 'l'){
+                this->board[trail[0]][trail[1] - 1].enqueue(c);
+            }
+            else{
+                this->board[trail[0]][trail[1] + 1].enqueue(c);
+            }
+        }
+
+        return true;
+    }
 
 };
