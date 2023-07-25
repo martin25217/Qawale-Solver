@@ -104,6 +104,7 @@ void printGameState(){ // nova fja koja ispisuje dva puta, ali mislim da sada tr
     
 //making move
 bool play(std::string userIn, Colors playerColor){
+        
         if(!validateInput(convertStringToInput(splitString(userIn)))) return false;
 
         char* trail = splitString(userIn);
@@ -114,9 +115,7 @@ bool play(std::string userIn, Colors playerColor){
         int size = this->board[iCoordinate][jCoordinate].size();
         for(int i = 0; i < size; i++){
             Colors c = this->board[iCoordinate][jCoordinate].dequeue();
-            if(c == red) peak.enqueue(red);
-            else if(c == white) peak.enqueue(white);
-            else peak.enqueue(yellow);
+            peak.enqueue(c);
         }
         peak.enqueue(playerColor);
         
@@ -125,24 +124,16 @@ bool play(std::string userIn, Colors playerColor){
         for(int i = 3; *(trail + i) != '\0'; i++){
             Colors c = peak.dequeue();
             if(trail[i] == 'd'){
-                if(c == red) this->board[++iCoordinate][jCoordinate].enqueue(red);
-                else if(c == white) this->board[++iCoordinate][jCoordinate].enqueue(white);
-                else this->board[++iCoordinate][jCoordinate].enqueue(yellow);
+                this->board[++iCoordinate][jCoordinate].enqueue(c);
             }
             else if(trail[i] == 'u'){
-                if(c == red) this->board[--iCoordinate][jCoordinate].enqueue(red);
-                else if(c == white) this->board[--iCoordinate][jCoordinate].enqueue(white);
-                else this->board[--iCoordinate][jCoordinate].enqueue(yellow);
+                this->board[--iCoordinate][jCoordinate].enqueue(c);
             }
             else if(trail[i] == 'l'){
-                if(c == red) this->board[iCoordinate][--jCoordinate].enqueue(red);
-                else if(c == white) this->board[iCoordinate][--jCoordinate].enqueue(white);
-                else this->board[iCoordinate][--jCoordinate].enqueue(yellow);
+                this->board[iCoordinate][--jCoordinate].enqueue(c);
             }
             else{
-                if(c == red) this->board[iCoordinate][++jCoordinate].enqueue(red);
-                else if(c == white) this->board[iCoordinate][++jCoordinate].enqueue(white);
-                else this->board[iCoordinate][++jCoordinate].enqueue(yellow);
+                board[iCoordinate][++jCoordinate].enqueue(c);
             }
         }
         

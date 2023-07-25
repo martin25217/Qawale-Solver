@@ -80,6 +80,11 @@ template <typename T> class Queue {
         else return false;
     }
 
+    T peek(){
+        if(!tail) return *tail;
+        else return *head;
+    }
+
     void clear(){
 
         Node *iterator = head;
