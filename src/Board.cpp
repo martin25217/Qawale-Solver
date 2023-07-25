@@ -94,9 +94,6 @@ void printGameState(){ // nova fja koja ispisuje dva puta, ali mislim da sada tr
                 }
 
                 for(int k = 0; k < maxHeight - this->board[i][j].size(); k++) result.push_back(' ');
-
-
-                    //std::cout << this->board[i][j].size() << std::endl;
                 std::cout << result; 
                 if(j != 3) std::cout << '|';
                 if(j == 3) std::cout << std::endl;
@@ -104,73 +101,29 @@ void printGameState(){ // nova fja koja ispisuje dva puta, ali mislim da sada tr
             }
         }
     }
-/*
-    void printGameState(){
-        int maxHeight = maxSizeQueue();
-
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                
-                
-                std::cout << printQueue(maxHeight, this->board[i][j]); 
-                if(j != 3) std::cout << '|';
-                if(j == 3) std::cout << std::endl;
-                
-            }
-        }
-    }
-
     
-
-    std::string printQueue(int maxHeight, Queue<Colors> queue){
-        std::string result;
-        Queue<Colors> helperQueue;
-
-        int size = queue.size();
-        for(int i = 0; i < size; i++){
-            Colors element = queue.dequeue();
-            if(element == red) result.push_back('r');
-            else if(element == white) result.push_back('w');
-            else result.push_back('y');
-            helperQueue.enqueue(element);
-        }
-
-        while(!helperQueue.isEmpty()) queue.enqueue(helperQueue.dequeue()); //po meni je ovo problem
-        int length = queue.size();
-        for(int i = length; i < maxHeight; i++) result.push_back(' ');
-
-        return result;
-    }
-*/
-    //Input functions end
-
 //making move
  bool play(std::string userIn, Colors playerColor){
-        if(!validateInput(convertStringToInput(splitString(userIn)))) return false;
 
-        char* trail = splitString(userIn);
-        //std::cout << printQueue(maxSizeQueue(), this->board[int(trail[0]) - 48][int(trail[1]) - 48]) << std::endl;
-        Queue<Colors> peak;
-        for(int i = 0; i < this->board[int(trail[0])][int(trail[1])].size(); i++) peak.enqueue(this->board[int(trail[0])][int(trail[1])].dequeue());
+        input convertedUserInput = convertStringToInput(splitString(userIn));
+        if(!validateInput(convertedUserInput)) return false;
+
+        char* trail = convertedUserInput.direction;
+
+        Queue<Colors> peak = board[convertedUserInput.startRow][convertedUserInput.startColumn];
+        int rows = convertedUserInput.startRow;
+        int columns = convertedUserInput.startColumn;
+        
         peak.enqueue(playerColor);
 
-        board[int(trail[0])][int(trail[1])].clear();
-
-        for(int i = 2; *(trail + i) != '\0'; i++){
-            Colors c = peak.dequeue();
-            if(trail[i] == 'd'){
-                this->board[trail[0] + 1][trail[1]].enqueue(c);
-            }
-            else if(trail[i] == 'u'){
-                this->board[trail[0] - 1][trail[1]].enqueue(c);
-            }
-            else if(trail[i] == 'l'){
-                this->board[trail[0]][trail[1] - 1].enqueue(c);
-            }
-            else{
-                this->board[trail[0]][trail[1] + 1].enqueue(c);
-            }
+        while(!peak.isEmpty()){
+            if(*trail = 'r') board[rows][columns++].enqueue(peak.dequeue());
+            if(*trail = 'l') board[rows][columns--].enqueue(peak.dequeue());
+            if(*trail = 'u') board[rows++][columns].enqueue(peak.dequeue());
+            if(*trail = 'd') board[rows--][columns].enqueue(peak.dequeue());
         }
+
+        delete &convertedUserInput;
 
         return true;
     }
