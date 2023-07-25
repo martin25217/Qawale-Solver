@@ -59,6 +59,52 @@ class Board{
 
     //Input functions start
 
+int maxSizeQueue(){
+        int max = 0;
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                if(board[i][j].size() > max) max = board[i][j].size(); 
+            }
+        }
+        return max;
+    }
+
+void printGameState(){ // nova fja koja ispisuje dva puta, ali mislim da sada treba doraditi play fju al msm da je to to ~Viki
+        int maxHeight = maxSizeQueue();
+        
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                
+                std::string result;
+
+                for(int k = 0; k < this->board[i][j].size(); k++){
+                    Colors element = this->board[i][j].dequeue();
+                    if(element == red){
+                        result.push_back('r');
+                        this->board[i][j].enqueue(red);
+                    }
+                    else if(element == white){
+                        result.push_back('w');
+                        this->board[i][j].enqueue(white);
+                    }
+                    else{
+                        result.push_back('y');
+                        this->board[i][j].enqueue(yellow);
+                    }
+                }
+
+                for(int k = 0; k < maxHeight - this->board[i][j].size(); k++) result.push_back(' ');
+
+
+                    //std::cout << this->board[i][j].size() << std::endl;
+                std::cout << result; 
+                if(j != 3) std::cout << '|';
+                if(j == 3) std::cout << std::endl;
+                
+            }
+        }
+    }
+/*
     void printGameState(){
         int maxHeight = maxSizeQueue();
 
@@ -74,15 +120,7 @@ class Board{
         }
     }
 
-    int maxSizeQueue(){
-        int max = 0;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                if(board[i][j].size() > max) max = board[i][j].size(); 
-            }
-        }
-        return max;
-    }
+    
 
     std::string printQueue(int maxHeight, Queue<Colors> queue){
         std::string result;
@@ -103,7 +141,7 @@ class Board{
 
         return result;
     }
-
+*/
     //Input functions end
 
 //making move
@@ -111,7 +149,7 @@ class Board{
         if(!validateInput(convertStringToInput(splitString(userIn)))) return false;
 
         char* trail = splitString(userIn);
-        std::cout << printQueue(maxSizeQueue(), this->board[int(trail[0]) - 48][int(trail[1]) - 48]) << std::endl;
+        //std::cout << printQueue(maxSizeQueue(), this->board[int(trail[0]) - 48][int(trail[1]) - 48]) << std::endl;
         Queue<Colors> peak;
         for(int i = 0; i < this->board[int(trail[0])][int(trail[1])].size(); i++) peak.enqueue(this->board[int(trail[0])][int(trail[1])].dequeue());
         peak.enqueue(playerColor);
