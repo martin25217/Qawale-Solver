@@ -140,4 +140,50 @@ bool play(std::string userIn, Colors playerColor){
         return true;
     }
 
+int winCheck(){
+        int w = 0, r = 0;
+        std::string col;
+        std::string row;
+        
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                Colors cCol = this->board[i][j].peek();
+                Colors cRow = this->board[j][i].peek();
+                if(cCol == yellow) col.push_back('y');
+                else if(cCol == red) col.push_back('r');
+                else col.push_back('w');
+                if(cRow == yellow) row.push_back('y');
+                else if(cRow == red) row.push_back('r');
+                else row.push_back('w');
+            }
+            if(col == "rrrr") r++;
+            else if(col == "wwww") w++;
+            if(row == "rrrr") r++;
+            else if(col == "wwww") w++;
+            col.clear();
+            row.clear();
+        }
+
+        for(int i = 0; i < 4; i++){
+            Colors cCol = this->board[i][i].peek();
+            Colors cRow = this->board[3 - i][3 - i].peek();
+            if(cCol == yellow) col.push_back('y');
+            else if(cCol == red) col.push_back('r');
+            else col.push_back('w');
+            if(cRow == yellow) row.push_back('y');
+            else if(cRow == red) row.push_back('r');
+            else row.push_back('w');
+        }
+        if(col == "rrrr") r++;
+        else if(col == "wwww") w++;
+        if(row == "rrrr") r++;
+        else if(col == "wwww") w++;
+
+        if(w == r && w == 0) return 0; //0 -> no winner
+        else if(w == r) return 3; //3 -> izjednačeno -> oba imaju niz od 4
+        else if(w > r) return 1; //1 -> w je pobijedio
+        else return 2; //2 -> r je pobijedio
+
+    }
+
 };
