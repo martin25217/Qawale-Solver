@@ -33,8 +33,8 @@ class Board{
         //Should bugs where every input is rejected occur this is the first place to look
         if(directionLength != board[userInput.startRow][userInput.startColumn].size() + 1) return false;
 
-        int rowHelper = userInput.startRow;
-        int columnHelper = userInput.startColumn;
+        int rowHelper = userInput.startColumn;
+        int columnHelper = userInput.startRow;
         char *directionHelper = userInput.direction;
 
         do{
