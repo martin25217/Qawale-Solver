@@ -81,8 +81,7 @@ template <typename T> class Queue {
     }
 
     T peek(){
-        if(!tail) return *tail;
-        else return *head;
+        return tail ==  nullptr ? yellow : tail->value; // yellow vraca jer je neutralno kad se provjerava win check maklo je nategnuto
     }
 
     void clear(){
